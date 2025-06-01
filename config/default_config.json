@@ -1,0 +1,117 @@
+{
+  "drone": {
+    "connection_string": "udp:127.0.0.1:14550",
+    "connection_timeout": 30,
+    "baud_rate": 57600,
+    "default_altitude": 10,
+    "max_altitude": 30,
+    "default_airspeed": 3,
+    "return_airspeed": 5,
+    "critical_battery_level": 15,
+    "low_battery_level": 30,
+    "missions": {
+      "patrol": {
+        "name": "Standard Patrol",
+        "waypoints": [
+          {"latitude": 37.7749, "longitude": -122.4194, "altitude": 10},
+          {"latitude": 37.7750, "longitude": -122.4190, "altitude": 15},
+          {"latitude": 37.7755, "longitude": -122.4185, "altitude": 10},
+          {"latitude": 37.7753, "longitude": -122.4192, "altitude": 15}
+        ]
+      },
+      "perimeter": {
+        "name": "Perimeter Check",
+        "waypoints": [
+          {"latitude": 37.7749, "longitude": -122.4194, "altitude": 15},
+          {"latitude": 37.7760, "longitude": -122.4194, "altitude": 15},
+          {"latitude": 37.7760, "longitude": -122.4180, "altitude": 15},
+          {"latitude": 37.7749, "longitude": -122.4180, "altitude": 15},
+          {"latitude": 37.7749, "longitude": -122.4194, "altitude": 15}
+        ]
+      }
+    }
+  },
+  "detection": {
+    "camera_source": 0,
+    "detection_interval": 0.5,
+    "fire_threshold": 0.7,
+    "person_threshold": 0.8,
+    "suspicious_threshold": 0.6,
+    "threat_threshold": 0.75,
+    "break_in_confidence": 0.85,
+    "restricted_hours": {
+      "start": 22,
+      "end": 6
+    },
+    "restricted_areas": [
+      {"x1": 100, "y1": 100, "x2": 300, "y2": 300},
+      {"x1": 400, "y1": 400, "x2": 600, "y2": 600}
+    ],
+    "fire_model": {
+      "path": "models/fire_model.tflite",
+      "labels": "models/fire_labels.txt"
+    },
+    "person_model": {
+      "path": "models/person_model.tflite",
+      "labels": "models/person_labels.txt"
+    },
+    "suspicious_model": {
+      "path": "models/suspicious_model.tflite",
+      "labels": "models/suspicious_labels.txt"
+    },
+    "threat_model": {
+      "path": "models/threat_model.tflite",
+      "labels": "models/threat_labels.txt"
+    }
+  },
+  "geofence": {
+    "max_altitude": 30,
+    "min_altitude": 2,
+    "buffer_distance": 5,
+    "default_center": {
+      "latitude": 37.7749,
+      "longitude": -122.4194
+    },
+    "default_radius": 100,
+    "boundaries": [
+      {
+        "type": "circle",
+        "name": "Main Area",
+        "center": {
+          "latitude": 37.7749,
+          "longitude": -122.4194
+        },
+        "radius": 100
+      },
+      {
+        "type": "polygon",
+        "name": "Secondary Area",
+        "coordinates": [
+          {"latitude": 37.7760, "longitude": -122.4190},
+          {"latitude": 37.7765, "longitude": -122.4180},
+          {"latitude": 37.7755, "longitude": -122.4175},
+          {"latitude": 37.7750, "longitude": -122.4185}
+        ],
+        "buffer": 5
+      }
+    ]
+  },
+  "communication": {
+    "method": "websocket",
+    "host": "0.0.0.0",
+    "port": 8000,
+    "rest_host": "0.0.0.0",
+    "rest_port": 8001
+  },
+  "emergency": {
+    "fire_inspection_altitude": 15,
+    "tracking_altitude": 10,
+    "investigation_altitude": 12,
+    "threat_observation_altitude": 20,
+    "automatic_response": true,
+    "alert_contacts": [
+      {"name": "Security Office", "email": "security@example.com", "phone": "555-1234"},
+      {"name": "Fire Department", "email": "fire@example.com", "phone": "555-5678"}
+    ]
+  }
+} 
